@@ -6,23 +6,23 @@ SetCompressor /SOLID lzma
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
 !define VERSION 0.9.2
-!define COMPANY "Bitcoin Core project"
-!define URL http://www.bitcoin.org/
+!define COMPANY "Zetacoin Core project"
+!define URL http://www.zeta-coin.org/
 
 # MUI Symbol Definitions
-!define MUI_ICON "/home/david/devel/zetacoin092/share/pixmaps/bitcoin.ico"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "/home/david/devel/zetacoin092/share/pixmaps/nsis-wizard.bmp"
+!define MUI_ICON "/zetacoin/share/pixmaps/bitcoin.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "/zetacoin/share/pixmaps/nsis-wizard.bmp"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
-!define MUI_HEADERIMAGE_BITMAP "/home/david/devel/zetacoin092/share/pixmaps/nsis-header.bmp"
+!define MUI_HEADERIMAGE_BITMAP "/zetacoin/share/pixmaps/nsis-header.bmp"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_STARTMENUPAGE_REGISTRY_ROOT HKLM
 !define MUI_STARTMENUPAGE_REGISTRY_KEY ${REGKEY}
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME StartMenuGroup
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Zetacoin Core"
-!define MUI_FINISHPAGE_RUN $INSTDIR\bitcoin-qt.exe
+!define MUI_FINISHPAGE_RUN $INSTDIR\zetacoin-qt.exe
 !define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/home/david/devel/zetacoin092/share/pixmaps/nsis-wizard.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "/zetacoin/share/pixmaps/nsis-wizard.bmp"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 
 # Included files
@@ -48,18 +48,18 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile /home/david/devel/zetacoin092/bitcoin-${VERSION}-win-setup.exe
+OutFile /zetacoin/zetacoin-${VERSION}-win-setup.exe
 !if "" == "64"
-InstallDir $PROGRAMFILES64\Bitcoin
+InstallDir $PROGRAMFILES64\Zetacoin
 !else
-InstallDir $PROGRAMFILES\Bitcoin
+InstallDir $PROGRAMFILES\Zetacoin
 !endif
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
 VIProductVersion ${VERSION}.1
-VIAddVersionKey ProductName "Bitcoin Core"
+VIAddVersionKey ProductName "Zetacoin Core"
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"
 VIAddVersionKey CompanyWebsite "${URL}"
@@ -73,19 +73,19 @@ ShowUninstDetails show
 Section -Main SEC0000
     SetOutPath $INSTDIR
     SetOverwrite on
-    File /home/david/devel/zetacoin092/release/bitcoin-qt.exe
-    File /oname=COPYING.txt /home/david/devel/zetacoin092/COPYING
-    File /oname=readme.txt /home/david/devel/zetacoin092/doc/README_windows.txt
+    File /zetacoin/release/zetacoin-qt.exe
+    File /oname=COPYING.txt /zetacoin/COPYING
+    File /oname=readme.txt /zetacoin/doc/README_windows.txt
     SetOutPath $INSTDIR\daemon
-    File /home/david/devel/zetacoin092/release/bitcoind.exe
-    File /home/david/devel/zetacoin092/release/bitcoin-cli.exe
+    File /zetacoin/release/zetacoind.exe
+    File /zetacoin/release/zetacoin-cli.exe
     SetOutPath $INSTDIR\doc
-    File /r /home/david/devel/zetacoin092/doc\*.*
+    File /r /zetacoin/doc\*.*
     SetOutPath $INSTDIR
     WriteRegStr HKCU "${REGKEY}\Components" Main 1
 
-    # Remove old wxwidgets-based-bitcoin executable and locales:
-    Delete /REBOOTOK $INSTDIR\bitcoin.exe
+    # Remove old wxwidgets-based-zetacoin executable and locales:
+    Delete /REBOOTOK $INSTDIR\zetacoin.exe
     RMDir /r /REBOOTOK $INSTDIR\locale
 SectionEnd
 
@@ -95,7 +95,7 @@ Section -post SEC0001
     WriteUninstaller $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     CreateDirectory $SMPROGRAMS\$StartMenuGroup
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" $INSTDIR\bitcoin-qt.exe
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk" $INSTDIR\zetacoin-qt.exe
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk" $INSTDIR\uninstall.exe
     !insertmacro MUI_STARTMENU_WRITE_END
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" DisplayName "$(^Name)"
@@ -106,10 +106,10 @@ Section -post SEC0001
     WriteRegStr HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" UninstallString $INSTDIR\uninstall.exe
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoModify 1
     WriteRegDWORD HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)" NoRepair 1
-    WriteRegStr HKCR "bitcoin" "URL Protocol" ""
-    WriteRegStr HKCR "bitcoin" "" "URL:Bitcoin"
-    WriteRegStr HKCR "bitcoin\DefaultIcon" "" $INSTDIR\bitcoin-qt.exe
-    WriteRegStr HKCR "bitcoin\shell\open\command" "" '"$INSTDIR\bitcoin-qt.exe" "%1"'
+    WriteRegStr HKCR "zetacoin" "URL Protocol" ""
+    WriteRegStr HKCR "zetacoin" "" "URL:Zetacoin"
+    WriteRegStr HKCR "zetacoin\DefaultIcon" "" $INSTDIR\zetacoin-qt.exe
+    WriteRegStr HKCR "zetacoin\shell\open\command" "" '"$INSTDIR\zetacoin-qt.exe" "%1"'
 SectionEnd
 
 # Macro for selecting uninstaller sections
@@ -127,7 +127,7 @@ done${UNSECTION_ID}:
 
 # Uninstaller sections
 Section /o -un.Main UNSEC0000
-    Delete /REBOOTOK $INSTDIR\bitcoin-qt.exe
+    Delete /REBOOTOK $INSTDIR\zetacoin-qt.exe
     Delete /REBOOTOK $INSTDIR\COPYING.txt
     Delete /REBOOTOK $INSTDIR\readme.txt
     RMDir /r /REBOOTOK $INSTDIR\daemon
@@ -139,7 +139,7 @@ Section -un.post UNSEC0001
     DeleteRegKey HKCU "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$(^Name)"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Uninstall $(^Name).lnk"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\$(^Name).lnk"
-    Delete /REBOOTOK "$SMSTARTUP\Bitcoin.lnk"
+    Delete /REBOOTOK "$SMSTARTUP\Zetacoin.lnk"
     Delete /REBOOTOK $INSTDIR\uninstall.exe
     Delete /REBOOTOK $INSTDIR\debug.log
     Delete /REBOOTOK $INSTDIR\db.log
@@ -147,7 +147,7 @@ Section -un.post UNSEC0001
     DeleteRegValue HKCU "${REGKEY}" Path
     DeleteRegKey /IfEmpty HKCU "${REGKEY}\Components"
     DeleteRegKey /IfEmpty HKCU "${REGKEY}"
-    DeleteRegKey HKCR "bitcoin"
+    DeleteRegKey HKCR "zetacoin"
     RmDir /REBOOTOK $SMPROGRAMS\$StartMenuGroup
     RmDir /REBOOTOK $INSTDIR
     Push $R0
