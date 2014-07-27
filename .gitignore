@@ -1,6 +1,9 @@
 *.tar.gz
 
 *.exe
+src/*.exe
+src/qt/*.exe
+
 src/zetacoin
 src/zetacoind
 src/zetacoin-cli
