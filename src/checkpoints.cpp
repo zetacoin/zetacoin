@@ -1,14 +1,16 @@
-// Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-
-#include <boost/assign/list_of.hpp> // for 'map_list_of()'
-#include <boost/foreach.hpp>
 
 #include "checkpoints.h"
 
 #include "main.h"
 #include "uint256.h"
+
+#include <stdint.h>
+
+#include <boost/assign/list_of.hpp> // for 'map_list_of()'
+#include <boost/foreach.hpp>
 
 namespace Checkpoints
 {
@@ -19,12 +21,12 @@ namespace Checkpoints
     // every system. When reindexing from a fast disk with a slow CPU, it
     // can be up to 20, while when downloading from a slow network with a
     // fast multicore CPU, it won't be much higher than 1.
-    static const double fSigcheckVerificationFactor = 5.0;
+    static const double SIGCHECK_VERIFICATION_FACTOR = 5.0;
 
     struct CCheckpointData {
         const MapCheckpoints *mapCheckpoints;
-        int64 nTimeLastCheckpoint;
-        int64 nTransactionsLastCheckpoint;
+        int64_t nTimeLastCheckpoint;
+        int64_t nTransactionsLastCheckpoint;
         double fTransactionsPerDay;
     };
 
@@ -52,11 +54,12 @@ namespace Checkpoints
         ( 870101, uint256("0x000000000006fcd0f5cff20c46d9da02f7835137bce0629431f1968c6d1dcab5"))
         ( 978901, uint256("0x00000000000456f795ce33e9ad1757150c1b5155230e4438b3690004e00f7ede"))
         (1272500, uint256("0x000000000001567d68a0197b43ec9c764d49a78cee9c318d58c5ae8d3a6a4a88"))
+        (1410098, uint256("0x000000000000ad1fe5f741c497aab1f4c9f2799ed2cce1c6715601e84c543368"))
         ;
     static const CCheckpointData data = {
         &mapCheckpoints,
-        1403333888, // * UNIX timestamp of last checkpoint block
-        1745605,    // * total number of transactions between genesis and last checkpoint
+        1406459538, // * UNIX timestamp of last checkpoint block
+        1924839,    // * total number of transactions between genesis and last checkpoint
                     //   (the tx=... number in the SetBestChain debug.log lines)
         2880        // * estimated number of transactions per day after checkpoint
     };
@@ -72,11 +75,24 @@ namespace Checkpoints
         2880
     };
 
+    static MapCheckpoints mapCheckpointsRegtest =
+        boost::assign::map_list_of
+        ( 0, uint256("0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206"))
+        ;
+    static const CCheckpointData dataRegtest = {
+        &mapCheckpointsRegtest,
+        0,
+        0,
+        0
+    };
+
     const CCheckpointData &Checkpoints() {
-        if (TestNet())
+        if (Params().NetworkID() == CChainParams::TESTNET)
             return dataTestnet;
-        else
+        else if (Params().NetworkID() == CChainParams::MAIN)
             return data;
+        else
+            return dataRegtest;
     }
 
     bool CheckBlock(int nHeight, const uint256& hash)
@@ -92,15 +108,16 @@ namespace Checkpoints
     }
 
     // Guess how far we are in the verification process at the given block index
-    double GuessVerificationProgress(CBlockIndex *pindex) {
+    double GuessVerificationProgress(CBlockIndex *pindex, bool fSigchecks) {
         if (pindex==NULL)
             return 0.0;
 
-        int64 nNow = time(NULL);
+        int64_t nNow = time(NULL);
 
+        double fSigcheckVerificationFactor = fSigchecks ? SIGCHECK_VERIFICATION_FACTOR : 1.0;
         double fWorkBefore = 0.0; // Amount of work done before pindex
         double fWorkAfter = 0.0;  // Amount of work left after pindex (estimated)
-        // Work is defined as: 1.0 per transaction before the last checkoint, and
+        // Work is defined as: 1.0 per transaction before the last checkpoint, and
         // fSigcheckVerificationFactor per transaction after.
 
         const CCheckpointData &data = Checkpoints();
