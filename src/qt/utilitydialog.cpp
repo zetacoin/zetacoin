@@ -26,7 +26,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui->setupUi(this);
 
     // Set current copyright year
-    ui->copyrightLabel->setText(tr("Copyright") + QString(" &copy; 2009-%1 ").arg(COPYRIGHT_YEAR) + tr("The Bitcoin Core developers") + QString(", &copy; 2009-%1 ").arg(COPYRIGHT_YEAR) + tr("The Zetacoin developers"));
+    ui->copyrightLabel->setText(tr("Copyright") + QString(" &copy; 2009-%1 ").arg(COPYRIGHT_YEAR) + tr("The Bitcoin Core developers") + QString(", &copy; 2009-%1 ").arg(COPYRIGHT_YEAR) + tr("The BitCoin, Zetacoin developers"));
 }
 
 void AboutDialog::setModel(ClientModel *model)
@@ -67,7 +67,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent) :
     header = tr("Zetacoin Core") + " " + tr("version") + " " +
         QString::fromStdString(FormatFullVersion()) + "\n\n" +
         tr("Usage:") + "\n" +
-        "  bitcoin-qt [" + tr("command-line options") + "]                     " + "\n";
+        "  zetacoin-qt [" + tr("command-line options") + "]                     " + "\n";
 
     coreOptions = QString::fromStdString(HelpMessage(HMM_BITCOIN_QT));
 
