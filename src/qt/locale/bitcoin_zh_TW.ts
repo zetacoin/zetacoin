@@ -17,7 +17,7 @@ Distributed under the MIT/X11 software license, see the accompanying file COPYIN
 
 This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/) and cryptographic software written by Eric Young (eay@cryptsoft.com) and UPnP software written by Thomas Bernard.</source>
         <translation>
-位元幣，原名是 Zetacoin, 又叫做比特幣。
+位元幣，原名是 Zetacoin, 又叫做泽塔幣。
 
 這是一套實驗性的軟體。
 
