@@ -134,6 +134,9 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
+        vSeeds.push_back(CDNSSeedData("test1.zetatestnet.pw", "test1.zetatestnet.pw"));
+        vSeeds.push_back(CDNSSeedData("test2.zetatestnet.pw", "test2.zetatestnet.pw"));
+        vSeeds.push_back(CDNSSeedData("test3.zetatestnet.pw", "test3.zetatestnet.pw"));
 
         base58Prefixes[PUBKEY_ADDRESS] = list_of(88);
         base58Prefixes[SCRIPT_ADDRESS] = list_of(188);
