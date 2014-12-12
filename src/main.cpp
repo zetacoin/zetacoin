@@ -1187,7 +1187,7 @@ int64_t GetBlockValue(int nHeight, int64_t nFees)
     int64_t nSubsidy = nStartSubsidy;
 
     // Mining phase: Subsidy is cut in half every SubsidyHalvingInterval
-    nSubsidy >>= (nHeight / Params().SubsidyHalvingInterval());
+    nSubsidy >>= min(63, (nHeight / Params().SubsidyHalvingInterval()));
     
     // Inflation phase: Subsidy reaches minimum subsidy
     // Network is rewarded for transaction processing with transaction fees and 
