@@ -60,18 +60,14 @@ public:
         assert(hashGenesisBlock == uint256("0x000006cab7aa2be2da91015902aa4458dd5fbb8778d175c36d429dc986f2bff4"));
         assert(genesis.hashMerkleRoot == uint256("0xd0227b8c3e3d07bce9656b3d9e474f050d23458aaead93357dcfdac9ab9b79f9"));
 
-        vSeeds.push_back(CDNSSeedData("seed1.zeta-coin.org", "seed1.zeta-coin.org"));
-        vSeeds.push_back(CDNSSeedData("seed2.zeta-coin.org", "seed2.zeta-coin.org"));
-        vSeeds.push_back(CDNSSeedData("seed3.zeta-coin.org", "seed3.zeta-coin.org"));
-        vSeeds.push_back(CDNSSeedData("seed4.zeta-coin.org", "seed4.zeta-coin.org"));
-        vSeeds.push_back(CDNSSeedData("seed5.zeta-coin.org", "seed5.zeta-coin.org"));
-        vSeeds.push_back(CDNSSeedData("seed6.zeta-coin.org", "seed6.zeta-coin.org"));
-        vSeeds.push_back(CDNSSeedData("seed7.zeta-coin.org", "seed7.zeta-coin.org"));
-        vSeeds.push_back(CDNSSeedData("seed8.zeta-coin.org", "seed8.zeta-coin.org"));
-        vSeeds.push_back(CDNSSeedData("albs1.zetacoinseed.com", "albs1.zetacoinseed.com"));
-        vSeeds.push_back(CDNSSeedData("albs2.zetacoinseed.com", "albs2.zetacoinseed.com"));
-        vSeeds.push_back(CDNSSeedData("albs3.zetacoinseed.com", "albs3.zetacoinseed.com"));
-        vSeeds.push_back(CDNSSeedData("albs4.zetacoinseed.com", "albs4.zetacoinseed.com"));
+        vSeeds.push_back(CDNSSeedData("seed1.zeta-coin.com", "seed1.zeta-coin.com"));
+        vSeeds.push_back(CDNSSeedData("seed2.zeta-coin.com", "seed2.zeta-coin.com"));
+        vSeeds.push_back(CDNSSeedData("seed3.zeta-coin.com", "seed3.zeta-coin.com"));
+        vSeeds.push_back(CDNSSeedData("seed4.zeta-coin.com", "seed4.zeta-coin.com"));
+        vSeeds.push_back(CDNSSeedData("seed5.zeta-coin.com", "seed5.zeta-coin.com"));
+        vSeeds.push_back(CDNSSeedData("seed6.zeta-coin.com", "seed6.zeta-coin.com"));
+        vSeeds.push_back(CDNSSeedData("seed7.zeta-coin.com", "seed7.zeta-coin.com"));
+        vSeeds.push_back(CDNSSeedData("seed8.zeta-coin.com", "seed8.zeta-coin.com"));
 
         base58Prefixes[PUBKEY_ADDRESS] = list_of(80);
         base58Prefixes[SCRIPT_ADDRESS] = list_of(9);
